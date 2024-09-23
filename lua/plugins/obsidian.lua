@@ -1,28 +1,22 @@
 return {
   {
-    "MeanderingProgrammer/markdown.nvim",
-    name = "render-markdown", -- Only needed if you have another plugin named markdown.nvim
+    "MeanderingProgrammer/render-markdown.nvim",
     dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
-    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
-    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+    -- reset defaults
     config = function()
       require("render-markdown").setup({})
     end,
   },
-  -- {
-  --   "OXY2DEV/markview.nvim",
-  --   lazy = false, -- Recommended
-  --   -- ft = "markdown" -- If you decide to lazy-load anyway
-  --
-  --   dependencies = {
-  --     -- You will not need this if you installed the
-  --     -- parsers manually
-  --     -- Or if the parsers are in your $RUNTIMEPATH
-  --     "nvim-treesitter/nvim-treesitter",
-  --
-  --     "nvim-tree/nvim-web-devicons",
-  --   },
-  -- },
+  {
+    "mfussenegger/nvim-lint",
+    opts = {
+      linters = {
+        ["markdownlint-cli2"] = {
+          args = { "--config", vim.fn.expand("~/.config/nvim-mylazy/lua/plugins/markdownlint-cli2.yaml"), "--" },
+        },
+      },
+    },
+  },
   {
     "epwalsh/obsidian.nvim",
     version = "*", -- recommended, use latest release instead of latest commit
@@ -141,12 +135,5 @@ return {
         end,
       })
     end,
-    -- config = function(_, opts)
-    --   require('obsidian').setup(opts)
-    --
-    --   -- reload the current color scheme to override obsidians.nvim's colors
-    --   local colorscheme = vim.g.colors_name
-    --   vim.cmd.colorscheme(colorscheme)
-    -- end,
   },
 }
