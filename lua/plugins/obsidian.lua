@@ -1,11 +1,26 @@
 return {
+  { "jghauser/follow-md-links.nvim" },
   {
     "MeanderingProgrammer/render-markdown.nvim",
     dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
     -- reset defaults
-    config = function()
-      require("render-markdown").setup({})
-    end,
+    opts = {
+      -- Mimic org-indent-mode behavior by indenting everything under a heading based on the
+      -- level of the heading. Indenting starts from level 2 headings onward.
+      sign = {
+        -- Turn on / off sign rendering
+        enabled = true,
+        -- Applies to background of sign text
+        highlight = "RenderMarkdownSign",
+      },
+      code = {
+        sign = true,
+      },
+      heading = {
+        sign = true,
+        icons = { "󰲡 ", "󰲣 ", "󰲥 ", "󰲧 ", "󰲩 ", "󰲫 " },
+      },
+    },
   },
   {
     "mfussenegger/nvim-lint",
